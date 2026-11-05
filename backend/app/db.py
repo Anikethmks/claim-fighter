@@ -70,6 +70,13 @@ CREATE TABLE IF NOT EXISTS sessions (
     expires_at TEXT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS reminders_sent (
+    case_id    TEXT NOT NULL REFERENCES cases(id) ON DELETE CASCADE,
+    kind       TEXT NOT NULL,
+    sent_at    TEXT NOT NULL,
+    PRIMARY KEY (case_id, kind)
+);
+
 CREATE TABLE IF NOT EXISTS chat_messages (
     id         INTEGER PRIMARY KEY AUTOINCREMENT,
     case_id    TEXT NOT NULL REFERENCES cases(id) ON DELETE CASCADE,
@@ -125,7 +132,7 @@ def connect(db_path: Path) -> sqlite3.Connection:
 # Columns added after the first release; init_db adds them to existing databases.
 ADDED_COLUMNS = {
     "cases": {"questions_json": "TEXT", "question_kind": "TEXT",  # questions the workflow is waiting on
-              "user_id": "TEXT", "consent_at": "TEXT"},
+              "user_id": "TEXT", "consent_at": "TEXT", "insurer_reply": "TEXT"},
 }
 
 

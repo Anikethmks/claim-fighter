@@ -11,13 +11,12 @@ import hashlib
 import logging
 import re
 import secrets
-import smtplib
 import sqlite3
 from datetime import datetime, timedelta, timezone
-from email.message import EmailMessage
 
 from fastapi import HTTPException, Request, Response
 
+from . import mailer
 from .config import settings
 from .db import transaction
 
@@ -48,27 +47,16 @@ def normalise_email(email: str) -> str:
 
 def deliver_code(email: str, code: str) -> None:
     """Send the code by email. Tests replace this function."""
-    smtp = settings.smtp
-    if not smtp["host"]:
-        if settings.prod:
-            raise HTTPException(503, "Email sign-in isn't configured yet.")
+    if not settings.smtp["host"] and not settings.prod:
         log.warning("DEV LOGIN CODE for %s: %s", email, code)
         return
-    msg = EmailMessage()
-    msg["Subject"] = f"Your ClaimFighter sign-in code: {code}"
-    msg["From"] = smtp["sender"] or smtp["user"]
-    msg["To"] = email
-    msg.set_content(f"Your ClaimFighter sign-in code is {code}. It expires in 10 minutes.\n\n"
-                    "If you didn't ask for this, you can ignore this email.")
     try:
-        with smtplib.SMTP(smtp["host"], smtp["port"], timeout=15) as s:
-            s.starttls()
-            if smtp["user"]:
-                s.login(smtp["user"], smtp["password"])
-            s.send_message(msg)
-    except (smtplib.SMTPException, OSError) as e:
-        log.exception("Could not send login code")
-        raise HTTPException(502, "Couldn't send the email. Please try again.") from e
+        mailer.send(email, f"Your ClaimFighter sign-in code: {code}",
+                    f"Your ClaimFighter sign-in code is {code}. It expires in 10 minutes.\n\n"
+                    "If you didn't ask for this, you can ignore this email.")
+    except mailer.MailError as e:
+        raise HTTPException(503 if not settings.smtp["host"] else 502,
+                            "Couldn't send the sign-in email. Please try again.") from e
 
 
 def request_code(conn: sqlite3.Connection, email: str) -> None:

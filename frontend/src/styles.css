@@ -319,3 +319,6 @@ a { color: var(--primary); }
 .table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
 .table th, .table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
 @media (max-width: 640px) { .topbar-user .topbar-note { display: none; } }
+
+.reply-box { border-top: 1px solid var(--border); margin-top: 8px; padding-top: 16px; }
+.reply-box h3 { margin-bottom: 4px; }

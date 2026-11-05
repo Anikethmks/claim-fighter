@@ -111,6 +111,7 @@ class Case:
     paid: int
     letter_body: list[str]
     letter_as_image: bool = False
+    letter_as_scan: bool = False     # image-only PDF, like a photocopied letter
     expected: dict = field(default_factory=dict)
     answer: str = ""
 
@@ -280,8 +281,16 @@ def no_reason_case() -> Case:
     )
 
 
+def scanned_case() -> Case:
+    c = day_care_case()
+    c.slug, c.title = "case-7-scanned-pdf", "Same as case 3, but the letter is a scanned PDF with no text layer"
+    c.letter_as_image, c.letter_as_scan = False, True
+    c.answer = ("Same as case 3 (Strong). Tests that a scanned PDF (no selectable text) is read correctly.")
+    return c
+
+
 CASES = [room_rent_case(), moratorium_case(), day_care_case(), initial_waiting_case(), specific_waiting_case(),
-         no_reason_case()]
+         no_reason_case(), scanned_case()]
 
 
 # ---------------------------------------------------------------------------
@@ -378,8 +387,15 @@ def main() -> None:
         folder.mkdir(exist_ok=True)
         write_policy(c, folder / "policy.pdf")
         write_bill(c, folder / "bill.pdf")
-        letter = folder / ("rejection-letter-photo.jpg" if c.letter_as_image else "rejection-letter.pdf")
-        (write_letter_image if c.letter_as_image else write_letter_pdf)(c, letter)
+        if c.letter_as_scan:
+            letter = folder / "rejection-letter-scanned.pdf"
+            photo = folder / "_scan.jpg"
+            write_letter_image(c, photo)
+            Image.open(photo).convert("RGB").save(letter, "PDF", resolution=150)
+            photo.unlink()
+        else:
+            letter = folder / ("rejection-letter-photo.jpg" if c.letter_as_image else "rejection-letter.pdf")
+            (write_letter_image if c.letter_as_image else write_letter_pdf)(c, letter)
         expected[c.slug] = {"files": {"policy": "policy.pdf", "bill": "bill.pdf", "rejection": letter.name}, **c.expected}
         answers.append(f"## {c.slug}: {c.title}\n\nFiles: `policy.pdf`, `bill.pdf`, `{letter.name}`\n\n**Expected:** {c.answer}\n")
         print(f"wrote {folder.name}")

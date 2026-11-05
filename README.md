@@ -18,6 +18,13 @@ Upload the insurer's letter, the policy and the hospital bill, and ClaimFighter:
 - **Cost guards:** a daily AI budget (`CF_DAILY_BUDGET_USD`) and a per-user daily case limit.
 - **Deploying:** see [DEPLOY.md](DEPLOY.md) (Render, Docker).
 
+## Escalation and data
+
+- **Ombudsman record:** official per-insurer health statistics from the Council for Insurance Ombudsmen annual report (statements H3/H5), e.g. "65% of 11,480 complaints resolved for policyholders". Shown as a record, never a prediction; matched strictly by insurer name. Refresh: `python -m scripts.ingest_ombudsman_stats --url <report pdf> --year <yyyy-yy>`.
+- **Escalation tracker:** paste the insurer's reply → records the date (starts the Ombudsman clock) and drafts an Ombudsman complaint answering each point.
+- **Deadline reminders:** an hourly job emails each reminder once: complaint not sent yet, Ombudsman now open, Ombudsman deadline (30/7/1 days), consumer-court deadline, award not complied with. Reminders stop when the outcome is reported.
+- **Scanned PDFs:** read via page images (OpenAI natively; Ollama renders pages with pypdfium2).
+
 ## Agents
 
 - **Case Workflow (LangGraph)** ([workflow.py](backend/app/workflow.py)):

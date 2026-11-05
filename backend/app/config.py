@@ -31,6 +31,8 @@ class Settings:
     admin_emails: set[str]
     daily_budget_usd: float      # stop new AI work once today's spend reaches this
     max_cases_per_user_day: int
+    public_url: str              # site address used in reminder emails
+    reminders: bool              # send deadline reminder emails
 
     @property
     def prod(self) -> bool:
@@ -89,6 +91,8 @@ def load_settings() -> Settings:
         admin_emails={e.strip().lower() for e in os.getenv("CF_ADMIN_EMAILS", "").split(",") if e.strip()},
         daily_budget_usd=float(os.getenv("CF_DAILY_BUDGET_USD", "2.0")),
         max_cases_per_user_day=int(os.getenv("CF_MAX_CASES_PER_USER_DAY", "5")),
+        public_url=os.getenv("CF_PUBLIC_URL", "").rstrip("/"),
+        reminders=os.getenv("CF_REMINDERS", "1").lower() in ("1", "true", "yes"),
     )
 
 

@@ -16,11 +16,12 @@ from fastapi import BackgroundTasks, Depends, FastAPI, File, Form, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-from . import assistant, auth, deadlines, llm, pipeline, usage, workflow
+from . import assistant, auth, deadlines, llm, pipeline, reminders, usage, workflow
 from .config import settings
 from .db import connect, init_db, insert_draft, loads, transaction
 from .knowledge import store
-from .schemas import Analysis, AnswersIn, CaseFacts, ChatIn, DraftRequest, EmailIn, MilestoneIn, OutcomeIn, VerifyIn
+from .schemas import (Analysis, AnswersIn, CaseFacts, ChatIn, DraftRequest, EmailIn, InsurerReplyIn, MilestoneIn,
+                      OutcomeIn, VerifyIn)
 
 log = logging.getLogger("claimfighter")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
@@ -58,6 +59,8 @@ def startup() -> None:
     purged = purge_expired(conn)
     conn.close()
     log.info("Knowledge base seeded with %d entries; purged %d expired documents", n, purged)
+    if settings.reminders and not settings.demo:
+        reminders.start_background()
 
 
 @asynccontextmanager
@@ -450,7 +453,7 @@ def knowledge(kind: str | None = None, q: str | None = None) -> list[dict]:
             entries = store.search(conn, q, kinds=[kind] if kind else None, limit=20)
         else:
             entries = store.by_kind(conn, kind) if kind else [
-                e for k in ("process", "regulation", "ombudsman_award", "court_judgment") for e in store.by_kind(conn, k)]
+                e for k in ("process", "regulation", "ombudsman_stats", "ombudsman_award", "court_judgment") for e in store.by_kind(conn, k)]
         return [e.to_dict() for e in entries]
     finally:
         conn.close()
@@ -592,6 +595,48 @@ def chat(case_id: str, body: ChatIn, background: BackgroundTasks, user: User) ->
         background.add_task(answer_questions, case_id,
                             [{"question": "Fact added in chat", "answer": f} for f in result["new_facts"]])
     return {"message": result["message"], "reanalysing": reanalysing}
+
+
+@app.post("/api/cases/{case_id}/insurer-reply", status_code=201)
+def insurer_reply(case_id: str, body: InsurerReplyIn, user: User) -> dict:
+    """Escalation: record the insurer's reply to the grievance and draft the Ombudsman complaint answering it."""
+    replied = deadlines.parse_date(body.replied_on)
+    if replied is None:
+        raise HTTPException(400, "Date must be YYYY-MM-DD.")
+    reply = body.reply_text.strip()[:6000]
+    if len(reply) < 20:
+        raise HTTPException(400, "Paste the insurer's reply (at least a sentence).")
+    conn = db()
+    try:
+        row = load_case_row(conn, case_id, user)
+        require_budget(conn)
+        if row["status"] != "analyzed":
+            raise HTTPException(409, "The case must finish analysis first.")
+        with transaction(conn):
+            conn.execute("UPDATE cases SET insurer_reply=? WHERE id=?", (reply, case_id))
+            conn.execute("INSERT INTO milestones (case_id, kind, happened_on) VALUES (?, 'insurer_replied', ?) "
+                         "ON CONFLICT(case_id, kind) DO UPDATE SET happened_on=excluded.happened_on",
+                         (case_id, replied.isoformat()))
+        req = DraftRequest(
+            stage="ombudsman", complainant_name=body.complainant_name, complainant_address=body.complainant_address,
+            complainant_phone=body.complainant_phone,
+            extra_instructions=(f"The insurer replied to my grievance on {replied.isoformat()}. Its reply, verbatim:\n"
+                                f"<insurer_reply>\n{reply}\n</insurer_reply>\nState the reply's date in the complaint "
+                                "and answer each point it makes, using the policy wording and the rules."))
+        try:
+            with usage.track() as calls:
+                body_text, refs, _ = pipeline.draft(conn, load_docs(conn, case_id), CaseFacts(**loads(row["facts_json"])),
+                                                    Analysis(**loads(row["analysis_json"])["analysis"]), req)
+        except llm.LLMError as e:
+            raise HTTPException(502, str(e)) from e
+        finally:
+            save_calls(case_id, calls)
+        draft_id = insert_draft(conn, case_id, "ombudsman", body_text, [e.id for e in refs])
+        return {"draft": {"id": draft_id, "stage": "ombudsman", "body": body_text, "references": [e.to_dict() for e in refs]},
+                "timeline": [s.to_dict() for s in deadlines.build_timeline(milestones_for(conn, case_id))],
+                "milestones": milestones_for(conn, case_id)}
+    finally:
+        conn.close()
 
 
 @app.post("/api/cases/{case_id}/drafts", status_code=201)

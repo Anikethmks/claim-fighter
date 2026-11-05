@@ -15,7 +15,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Iterable
 
-SEED_FILE = Path(__file__).with_name("seed_regulations.json")
+# Every *.json here is loaded at startup: verified rules plus generated data such as Ombudsman statistics.
+SEED_DIR = Path(__file__).parent
 
 _STOPWORDS = {
     "the", "a", "an", "and", "or", "of", "to", "in", "on", "for", "is", "was", "by", "with",
@@ -80,11 +81,13 @@ def upsert(conn: sqlite3.Connection, entry: dict) -> None:
 
 
 def load_seed(conn: sqlite3.Connection) -> int:
-    entries = json.loads(SEED_FILE.read_text(encoding="utf-8"))
-    for entry in entries:
-        upsert(conn, entry)
+    count = 0
+    for path in sorted(SEED_DIR.glob("*.json")):
+        for entry in json.loads(path.read_text(encoding="utf-8")):
+            upsert(conn, entry)
+            count += 1
     conn.commit()
-    return len(entries)
+    return count
 
 
 def _fts_query(text: str) -> str | None:

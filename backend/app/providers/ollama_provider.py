@@ -3,7 +3,7 @@
 Meant for development and for privacy-first setups. Differences from the
 API providers:
 - PDFs are sent as extracted text (local models don't read PDFs directly);
-  scanned PDFs without a text layer are rejected with a clear message.
+  scanned PDFs without a text layer are rendered to page images instead.
 - Photos are downscaled before sending; full-size phone photos are very slow on CPU.
 - Ollama's default context window is small and truncates silently, so it is set explicitly.
 """
@@ -20,6 +20,7 @@ from typing import Sequence, TypeVar
 import httpx
 from PIL import Image
 from pydantic import BaseModel, ValidationError
+import pypdfium2 as pdfium
 from pypdf import PdfReader
 
 from .. import usage
@@ -30,25 +31,39 @@ T = TypeVar("T", bound=BaseModel)
 
 NUM_CTX = int(os.getenv("CF_OLLAMA_NUM_CTX", "16384"))
 MAX_IMAGE_SIDE = 1600
+MAX_SCANNED_PAGES = 10
 TIMEOUT = httpx.Timeout(1800.0, connect=5.0)  # CPU inference can take many minutes
 
 
-def _pdf_text(doc: CaseDocument) -> str:
+def _pdf_text(doc: CaseDocument) -> str | None:
+    """The PDF's text, or None when it's a scan without a text layer."""
     try:
         reader = PdfReader(doc.path)
         pages = [p.extract_text() or "" for p in reader.pages]
     except Exception as e:
         raise LLMError(f"Could not read {doc.filename}: {e}") from e
     if sum(len(p.strip()) for p in pages) < 40 * max(1, len(pages)):
-        raise LLMError(
-            f"{doc.filename} looks like a scanned PDF. Local mode can't read scanned PDFs yet; "
-            "upload photos of the pages instead."
-        )
+        return None
     return "\n\n".join(f"[page {i + 1}]\n{p}" for i, p in enumerate(pages))
 
 
+def _scan_pages_b64(doc: CaseDocument) -> list[str]:
+    """Render a scanned PDF's pages as images for the vision model."""
+    try:
+        pdf = pdfium.PdfDocument(doc.path)
+    except pdfium.PdfiumError as e:
+        raise LLMError(f"Could not read {doc.filename}. Is it a valid PDF?") from e
+    if len(pdf) > MAX_SCANNED_PAGES:
+        raise LLMError(f"{doc.filename} is a {len(pdf)}-page scan; local mode reads up to {MAX_SCANNED_PAGES} "
+                       "scanned pages. Upload only the relevant pages.")
+    return [_pil_b64(pdf[i].render(scale=2).to_pil()) for i in range(len(pdf))]
+
+
 def _image_b64(path: str) -> str:
-    img = Image.open(path)
+    return _pil_b64(Image.open(path))
+
+
+def _pil_b64(img: Image.Image) -> str:
     img.thumbnail((MAX_IMAGE_SIDE, MAX_IMAGE_SIDE))
     buf = io.BytesIO()
     img.convert("RGB").save(buf, "JPEG", quality=88)
@@ -58,8 +73,14 @@ def _image_b64(path: str) -> str:
 def _messages(docs: Sequence[CaseDocument], instruction: str) -> list[dict]:
     parts, images = [], []
     for doc in docs:
-        if doc.media_type == "application/pdf":
-            parts.append(f'<document role="{doc.role}" name="{doc.filename}">\n{_pdf_text(doc)}\n</document>')
+        text = _pdf_text(doc) if doc.media_type == "application/pdf" else None
+        if text is not None:
+            parts.append(f'<document role="{doc.role}" name="{doc.filename}">\n{text}\n</document>')
+        elif doc.media_type == "application/pdf":
+            first = len(images) + 1
+            images.extend(_scan_pages_b64(doc))
+            parts.append(f'<document role="{doc.role}" name="{doc.filename}">[scanned: attached images '
+                         f'{first}-{len(images)}]</document>')
         else:
             images.append(_image_b64(doc.path))
             parts.append(f'<document role="{doc.role}" name="{doc.filename}">[attached image {len(images)}]</document>')

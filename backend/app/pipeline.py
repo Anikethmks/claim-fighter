@@ -7,6 +7,7 @@ and results are stored between steps.
 from __future__ import annotations
 
 import json
+import re
 import sqlite3
 from datetime import date
 from typing import Sequence
@@ -68,6 +69,12 @@ list is fine. Unverified entries are summaries; do not overstate them.
 - overall_strength: how strong the case is for the money in dispute. Judge it by the issues \
 that matter most by amount; a valid minor deduction does not lower an otherwise strong case. \
 The headline must agree with this rating.
+- Amounts: only state amounts that appear in the documents or in <computed>, plus totals of the \
+amounts you assign to issues. Don't add side calculations; arithmetic errors mislead users.
+- If an ombudsman_stats entry for this insurer is provided, and the case is worth contesting, \
+mention its Ombudsman record once in the most relevant issue's assessment and put its id in that \
+issue's citation_ids. Present it as an overall record, never as a prediction for this case.
+- Never write knowledge base ids in any text field; ids go only in citation_ids.
 - amount_recoverable_estimate: sum of amounts on issues rated strong or moderate, or null.
 - questions_for_user: facts you need that the documents do not show (e.g. date of first \
 policy, whether the condition was diagnosed earlier).
@@ -194,6 +201,25 @@ def computed_facts(facts: CaseFacts) -> dict:
     return out
 
 
+_GENERIC_NAME_WORDS = {"insurance", "ins", "insc", "co", "company", "ltd", "limited", "general", "gen", "health",
+                       "life", "the", "of", "and", "india", "pvt", "private", "corporation", "corp", "assurance"}
+
+
+def _name_words(name: str) -> set[str]:
+    return set(re.findall(r"[a-z]+", name.lower())) - _GENERIC_NAME_WORDS
+
+
+def same_insurer(record_name: str | None, insurer_name: str | None) -> bool:
+    """True when every distinctive word of the record's insurer appears in the case's insurer name.
+
+    Strict on purpose: quoting another company's record would be worse than quoting none.
+    """
+    if not record_name or not insurer_name:
+        return False
+    distinctive = _name_words(record_name)
+    return bool(distinctive) and distinctive <= _name_words(insurer_name)
+
+
 def retrieve(conn: sqlite3.Connection, facts: CaseFacts) -> list[KBEntry]:
     """Find rules and past awards relevant to each reason the insurer gave."""
     queries = [*facts.rejection_reasons, *facts.clauses_cited_by_insurer]
@@ -202,6 +228,10 @@ def retrieve(conn: sqlite3.Connection, facts: CaseFacts) -> list[KBEntry]:
         queries.append(facts.diagnosis)
 
     found: dict[str, KBEntry] = {e.id: e for e in store.get_many(conn, CORE_PROCESS_IDS)}
+    # The insurer's official Ombudsman record (strict name match), plus the industry figure for context.
+    for e in store.by_kind(conn, "ombudsman_stats"):
+        if e.id.endswith("-all-insurers") or same_insurer(e.meta.get("insurer"), facts.insurer_name):
+            found.setdefault(e.id, e)
     for q in queries:
         for e in store.search(conn, q, kinds=["regulation", "process"], limit=3):
             found.setdefault(e.id, e)

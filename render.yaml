@@ -18,6 +18,8 @@ services:
         value: "5"
       - key: OPENAI_API_KEY
         sync: false
+      - key: CF_PUBLIC_URL      # e.g. https://claimfighter-xxxx.onrender.com (links in reminder emails)
+        sync: false
       - key: CF_ADMIN_EMAILS
         sync: false
       - key: CF_SMTP_HOST

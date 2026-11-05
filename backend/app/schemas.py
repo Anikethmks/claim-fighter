@@ -119,3 +119,11 @@ class EmailIn(BaseModel):
 class VerifyIn(BaseModel):
     email: str
     code: str
+
+
+class InsurerReplyIn(BaseModel):
+    replied_on: str             # YYYY-MM-DD
+    reply_text: str
+    complainant_name: Optional[str] = None
+    complainant_address: Optional[str] = None
+    complainant_phone: Optional[str] = None
