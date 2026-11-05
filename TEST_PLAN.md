@@ -116,6 +116,19 @@ Use the **"Ask about your case"** box on a finished case. Under each answer, che
 
 ---
 
+## Part D2: New features
+
+| # | Do this | Expect |
+|---|---|---|
+| N1 | Upload a case with a real insurer's name in the letter (e.g. Star Health) | The analysis mentions that insurer's Ombudsman record as a numbered source ("Ombudsman record"); fictional insurers get only the all-insurers figure |
+| N2 | Upload `case-7-scanned-pdf` (the letter is a scanned PDF) | Same verdict as case 3 (Strong) |
+| N3 | On a case, set "I sent my complaint" → the **Got a reply from the insurer?** box appears → paste a reply → **Draft my Ombudsman complaint** | The Ombudsman step shows the new dates, and an Ombudsman letter answering the reply appears under drafts |
+| N4 | Reminders (local): keep the server running for over a minute after creating a strong case dated 3+ days ago, or run `python -c "from app import reminders, db; from app.config import settings; print(reminders.send_due(db.connect(settings.db_path)))"` | `DEV EMAIL to …` lines in the server terminal |
+
+☐ N1 ☐ N2 ☐ N3 ☐ N4
+
+---
+
 ## Part E: Errors and edge cases
 
 | # | Do this | Expect |

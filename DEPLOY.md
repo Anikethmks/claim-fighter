@@ -22,6 +22,7 @@ See "GitHub" below.
 |---|---|
 | `OPENAI_API_KEY` | your key |
 | `CF_ADMIN_EMAILS` | your email (unlocks the Dashboard) |
+| `CF_PUBLIC_URL` | the site address Render gives you (used in reminder emails); add it after the first deploy |
 | `CF_SMTP_HOST`, `CF_SMTP_USER`, `CF_SMTP_PASSWORD` | from step 1 |
 | `CF_EMAIL_FROM` | the verified sender, e.g. `ClaimFighter <you@gmail.com>` |
 

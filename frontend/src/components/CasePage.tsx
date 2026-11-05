@@ -209,14 +209,14 @@ export default function CasePage({ id }: { id: string }) {
 
       {data.chat_enabled && <Chat caseId={id} initial={data.chat} onReanalysing={refresh} />}
 
-      <Timeline caseId={id} initial={data.timeline} initialMilestones={data.milestones} />
+      <Timeline caseId={id} initial={data.timeline} initialMilestones={data.milestones} onDrafted={refresh} />
       {analysis.overall_strength === "weak" && (
         <div className="alert alert-info">
           <strong>Our honest view:</strong> the insurer's decision looks correct under your policy, so a complaint is
           unlikely to succeed. You can still draft one, for example if you have facts the documents don't show.
         </div>
       )}
-      <Drafts caseId={id} initial={data.drafts} recommended={analysis.recommended_next_stage} />
+      <Drafts key={data.drafts.length} caseId={id} initial={data.drafts} recommended={analysis.recommended_next_stage} />
       <Outcome caseId={id} initial={data.outcome} />
 
       <section className="danger-zone">

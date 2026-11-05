@@ -6,6 +6,7 @@ import pytest
 
 # Isolate test data before the app reads its settings.
 os.environ["CF_DATA_DIR"] = tempfile.mkdtemp(prefix="claimfighter-test-")
+os.environ["CF_REMINDERS"] = "0"  # tests call reminders.send_due directly
 
 SENT_CODES: dict[str, str] = {}
 

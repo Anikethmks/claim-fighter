@@ -37,3 +37,9 @@ Files: `policy.pdf`, `bill.pdf`, `rejection-letter.pdf`
 Files: `policy.pdf`, `bill.pdf`, `rejection-letter.pdf`
 
 **Expected:** The workflow should PAUSE before analysis and ask what reason the insurer gave (the letter gives none). Status 'needs_input', no paid analysis yet. After you answer (e.g. 'They said appendicitis is excluded in the first two years'), it analyses: appendicitis is not in this policy's waiting-period lists and cover started in Feb 2023, so expect a strong case.
+
+## case-7-scanned-pdf: Same as case 3, but the letter is a scanned PDF with no text layer
+
+Files: `policy.pdf`, `bill.pdf`, `rejection-letter-scanned.pdf`
+
+**Expected:** Same as case 3 (Strong). Tests that a scanned PDF (no selectable text) is read correctly.

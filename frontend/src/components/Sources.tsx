@@ -5,6 +5,7 @@ const KIND_LABEL: Record<KBEntry["kind"], string> = {
   regulation: "Rule",
   process: "Process",
   ombudsman_award: "Ombudsman decision",
+  ombudsman_stats: "Ombudsman record",
   court_judgment: "Court judgment",
 };
 

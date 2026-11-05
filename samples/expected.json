@@ -99,5 +99,23 @@
       "unknown"
     ],
     "claim_amount": 121000
+  },
+  "case-7-scanned-pdf": {
+    "files": {
+      "policy": "policy.pdf",
+      "bill": "bill.pdf",
+      "rejection": "rejection-letter-scanned.pdf"
+    },
+    "overall": [
+      "strong",
+      "moderate"
+    ],
+    "citations_any": [
+      "reg-day-care"
+    ],
+    "decision": [
+      "fully_rejected"
+    ],
+    "claim_amount": 62000
   }
 }

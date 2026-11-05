@@ -126,3 +126,27 @@ def test_computed_facts_prefers_continuity_date():
 
 def test_computed_facts_bad_dates_dont_crash():
     assert "note" in computed_facts(_facts(admission_date="sometime in feb"))
+
+
+# ---------- Ombudsman statistics ----------
+
+@pytest.mark.parametrize("record,case_insurer,expected", [
+    ("Star Health and Allied Ins. Co. Ltd", "Star Health and Allied Insurance Company Limited", True),
+    ("Care Health Ins. Ltd", "CARE HEALTH INSURANCE LTD.", True),
+    ("Aditya Birla Health Insurance Company Limited", "Suraksha Health Insurance Ltd.", False),  # fictional: no match
+    ("Care Health Ins. Ltd", "Niva Bupa Health Insurance", False),
+    ("Care Health Ins. Ltd", None, False),
+])
+def test_same_insurer_is_strict(record, case_insurer, expected):
+    from app.pipeline import same_insurer
+    assert same_insurer(record, case_insurer) is expected
+
+
+def test_retrieve_adds_insurer_record_and_industry_figure(conn):
+    from app.pipeline import retrieve
+    ids = [e.id for e in retrieve(conn, _facts(insurer_name="Star Health and Allied Insurance Co. Ltd.",
+                                                rejection_reasons=["room rent"]))]
+    assert any(i.startswith("stats-") and "star" in i for i in ids)
+    assert any(i.endswith("-all-insurers") for i in ids)
+    fictional = [e.id for e in retrieve(conn, _facts(insurer_name="Suraksha Health Insurance Ltd."))]
+    assert [i for i in fictional if i.startswith("stats-")] == ["stats-2023-24-all-insurers"]

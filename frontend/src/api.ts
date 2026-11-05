@@ -5,7 +5,7 @@ export type Stage = "insurer_grievance" | "bima_bharosa" | "ombudsman" | "consum
 
 export interface KBEntry {
   id: string;
-  kind: "regulation" | "process" | "ombudsman_award" | "court_judgment";
+  kind: "regulation" | "process" | "ombudsman_award" | "ombudsman_stats" | "court_judgment";
   title: string;
   body: string;
   source_name: string;
@@ -169,6 +169,9 @@ export const api = {
   reanalyze: (id: string) => request<{ id: string }>(`/api/cases/${id}/reanalyze`, { method: "POST" }),
   answer: (id: string, answers: { question: string; answer: string }[]) =>
     request<{ status: CaseStatus }>(`/api/cases/${id}/answers`, json("POST", { answers })),
+  insurerReply: (id: string, replied_on: string, reply_text: string) =>
+    request<{ draft: Draft; timeline: TimelineStep[]; milestones: Record<string, string> }>(
+      `/api/cases/${id}/insurer-reply`, json("POST", { replied_on, reply_text })),
   chat: (id: string, message: string) =>
     request<{ message: ChatMessage; reanalysing: boolean }>(`/api/cases/${id}/chat`, json("POST", { message })),
   createDraft: (id: string, req: DraftRequest) => request<Draft>(`/api/cases/${id}/drafts`, json("POST", req)),

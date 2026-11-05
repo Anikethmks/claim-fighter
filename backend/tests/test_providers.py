@@ -156,10 +156,17 @@ def test_ollama_retries_once_on_bad_json(tmp_path, monkeypatch):
     assert len(fake.bodies) == 2
 
 
-def test_ollama_rejects_scanned_pdf(tmp_path):
+def test_ollama_renders_blank_scan_and_rejects_broken_pdf(tmp_path):
     from reportlab.pdfgen import canvas
-    path = tmp_path / "scan.pdf"
-    canvas.Canvas(str(path)).save()  # a page with no text layer
-    doc = llm.CaseDocument(role="policy", filename="scan.pdf", media_type="application/pdf", path=str(path))
-    with pytest.raises(llm.LLMError, match="scanned PDF"):
+    scan = tmp_path / "scan.pdf"
+    c = canvas.Canvas(str(scan))
+    c.showPage()  # one page, no text layer
+    c.save()
+    doc = llm.CaseDocument(role="policy", filename="scan.pdf", media_type="application/pdf", path=str(scan))
+    assert len(ollama_provider._messages([doc], "x")[1]["images"]) == 1
+
+    broken = tmp_path / "broken.pdf"
+    broken.write_bytes(b"%PDF-1.4 not really a pdf")
+    doc = llm.CaseDocument(role="policy", filename="broken.pdf", media_type="application/pdf", path=str(broken))
+    with pytest.raises(llm.LLMError):
         ollama_provider._messages([doc], "x")
