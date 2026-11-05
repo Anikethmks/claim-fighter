@@ -1,0 +1,233 @@
+[
+  {
+    "id": "proc-insurer-grievance",
+    "kind": "process",
+    "title": "Step 1: Written complaint to the insurer (resolution within 14 days)",
+    "body": "Before going to the Insurance Ombudsman, complain to the insurer in writing: by letter or email, on its website or grievance portal, at a branch, or through its call centre. Keep proof of when it was sent and received. Under IRDAI's 2024 Master Circular on Protection of Policyholders' Interests, the insurer must acknowledge the complaint immediately and resolve it within 14 days. If it does not accept the complaint, it must give reasons that refer to specific policy terms. You can go to the Ombudsman if the insurer rejects the complaint, you are not satisfied with its reply, or it has not replied within one month of receiving it.",
+    "source_name": "IRDAI Master Circular on Protection of Policyholders' Interests, 2024, Section 1, Part VI (Grievance Redressal), paras 1-2",
+    "source_url": "https://irdai.gov.in/document-detail?documentId=5625747",
+    "tags": "grievance complaint insurer GRO first step written representation acknowledgement 14 days reasons",
+    "verified": true,
+    "meta": {"verified_on": "2026-11-05"}
+  },
+  {
+    "id": "proc-bima-bharosa",
+    "kind": "process",
+    "title": "IRDAI Bima Bharosa grievance portal",
+    "body": "IRDAI runs the Bima Bharosa portal (bimabharosa.irdai.gov.in), where policyholders can register a complaint against an insurer online and track its status. A complaint registered there goes straight into the insurer's grievance system and is also recorded with IRDAI. Where a complaint is not resolved satisfactorily, IRDAI's grievance cell can take it up with the insurer and facilitate its re-examination. Compensation in a disputed claim is awarded by the Insurance Ombudsman or a consumer commission.",
+    "source_name": "IRDAI Master Circular on Protection of Policyholders' Interests, 2024, Section 1, Part VI; Bima Bharosa FAQ; IRDAI Grievance Cell page",
+    "source_url": "https://bimabharosa.irdai.gov.in/Home/FAQ",
+    "tags": "bima bharosa IRDAI portal grievance register track IGMS regulator",
+    "verified": true,
+    "meta": {"verified_on": "2026-11-05"}
+  },
+  {
+    "id": "proc-ombudsman-eligibility",
+    "kind": "process",
+    "title": "When you can approach the Insurance Ombudsman",
+    "body": "Under Rule 14(3) of the Insurance Ombudsman Rules, 2017, you can complain to the Ombudsman only after making a written representation to the insurer (by letter, email or online), and then if: (a) the insurer rejected it, (b) the insurer did not reply within one month of receiving it, or (c) you are not satisfied with the reply. Under Rule 14(5), the same matter must not be pending before, or already decided by, a court, consumer commission or arbitrator. Under Rule 13, the Ombudsman handles delays in settling claims, partial or total repudiation of claims, disputes about interpreting the policy as it relates to a claim, and policy servicing grievances.",
+    "source_name": "Insurance Ombudsman Rules, 2017 (as amended up to 9 Nov 2023), Rules 13 and 14",
+    "source_url": "https://cioins.co.in:8082/notification/Insurance%20Ombudsman%20Rules,%202017(%20as%20amended%20till%2009.11.2023).pdf",
+    "tags": "ombudsman eligibility one month reply rejection representation repudiation partial claim not pending court",
+    "verified": true,
+    "meta": {"verified_on": "2026-11-05"}
+  },
+  {
+    "id": "proc-ombudsman-time-limit",
+    "kind": "process",
+    "title": "Time limit for an Ombudsman complaint (one year)",
+    "body": "Under Rule 14(3)(b) of the Insurance Ombudsman Rules, 2017, the complaint must be filed within one year of receiving the insurer's rejection or its unsatisfactory reply. If the insurer did not reply, the year runs from one month after you sent your written complaint. Under Rule 14(4), the Ombudsman can condone a delay after hearing the insurer's objections and recording reasons, but this is discretionary. File well within the year.",
+    "source_name": "Insurance Ombudsman Rules, 2017 (as amended up to 9 Nov 2023), Rule 14(3)(b) and 14(4)",
+    "source_url": "https://cioins.co.in:8082/notification/Insurance%20Ombudsman%20Rules,%202017(%20as%20amended%20till%2009.11.2023).pdf",
+    "tags": "ombudsman time limit one year deadline limitation admissible condone delay",
+    "verified": true,
+    "meta": {"verified_on": "2026-11-05"}
+  },
+  {
+    "id": "proc-ombudsman-award",
+    "kind": "process",
+    "title": "What the Ombudsman can award (up to ₹50 lakh) and how fast",
+    "body": "The Ombudsman first tries mediation; if both sides consent and settle, it makes a recommendation within one month (Rule 16). Otherwise it passes an award, within three months of receiving everything it needs from the complainant (Rule 17(4)). Since the November 2023 amendment (G.S.R. 828(E)), the award cannot exceed the actual loss suffered, or ₹50 lakh including expenses (Rule 17(3)). The award binds the insurer, which must comply within 30 days (Rule 17(6)). Under IRDAI's 2024 policyholder-protection circular, an insurer that does not honour the award within 30 days must pay the complainant ₹5,000 per day of delay, in addition to penal interest, unless it appeals within 30 days. If you are not satisfied with the award, you can still go to a consumer commission or court. Filing is free, and the Rules make no provision for engaging a lawyer.",
+    "source_name": "Insurance Ombudsman Rules, 2017 (as amended up to 9 Nov 2023), Rules 16-17; IRDAI Master Circular on Protection of Policyholders' Interests, 2024, Section 1, Part VI, para 4; CIO FAQs",
+    "source_url": "https://cioins.co.in:8082/notification/Insurance%20Ombudsman%20Rules,%202017(%20as%20amended%20till%2009.11.2023).pdf",
+    "tags": "ombudsman award limit 50 lakh three months 30 days comply binding insurer free no lawyer mediation penalty 5000 per day",
+    "verified": true,
+    "meta": {"verified_on": "2026-11-05"}
+  },
+  {
+    "id": "proc-ombudsman-filing",
+    "kind": "process",
+    "title": "How to file with the Insurance Ombudsman",
+    "body": "You can file with the Insurance Ombudsman online (cioins.co.in/Complaint/Online), by email or post, or in person. File with the Ombudsman office whose area covers either your place of residence or the insurer's branch or office you dealt with (Rule 14(1)). The complaint must give your name and address, the insurer's branch or office, the facts with supporting documents, the nature and extent of your loss, and the relief you want (Rule 14(2)). Attach the policy, claim documents, the rejection or settlement letter, your complaint to the insurer and its reply. If the claim was denied for a pre-existing disease or waiting period, the Council for Insurance Ombudsmen also asks for earlier policies. The Ombudsman may ask either side for further documents (Rule 15).",
+    "source_name": "Insurance Ombudsman Rules, 2017 (as amended up to 9 Nov 2023), Rules 14-15; Council for Insurance Ombudsmen, Procedure page",
+    "source_url": "https://www.cioins.co.in/Procedure/Index",
+    "tags": "ombudsman filing online CIO office jurisdiction address documents relief residence branch",
+    "verified": true,
+    "meta": {"verified_on": "2026-11-05"}
+  },
+  {
+    "id": "proc-consumer-commission",
+    "kind": "process",
+    "title": "Consumer commission: which one, time limit and e-filing",
+    "body": "Under the Consumer Protection Act, 2019, deficiency in insurance service can be taken to a Consumer Disputes Redressal Commission. Under the 2021 jurisdiction rules (G.S.R. 912(E)), the right commission depends on the value paid as consideration for the service: the District Commission handles up to ₹50 lakh, the State Commission above ₹50 lakh up to ₹2 crore, and the National Commission above ₹2 crore. A District complaint can be filed where you live or work (Section 34(2)(d)). It must be filed within two years from when the cause of action arose (Section 69), unless the commission accepts sufficient cause for delay and records its reasons. Complaints can be filed electronically (Section 35) through the government's e-Jagriti portal, which replaced e-Daakhil in 2025.",
+    "source_name": "Consumer Protection Act, 2019, ss. 34, 35, 69; Consumer Protection (Jurisdiction) Rules, 2021 (G.S.R. 912(E), 30 Dec 2021); Department of Consumer Affairs year-end review 2025",
+    "source_url": "https://egazette.gov.in/WriteReadData/2019/210422.pdf",
+    "tags": "consumer commission court district state national 50 lakh 2 crore two years limitation section 69 e-jagriti e-daakhil deficiency service",
+    "verified": true,
+    "meta": {"verified_on": "2026-11-05"}
+  },
+  {
+    "id": "reg-moratorium",
+    "kind": "regulation",
+    "title": "Moratorium: after 60 months of continuous cover, no contesting for non-disclosure (except fraud)",
+    "body": "Under the IRDAI (Insurance Products) Regulations, 2024, once a health policy from a general or health insurer has been in force for 60 continuous months, the insurer cannot contest the policy or a claim on grounds of non-disclosure or misrepresentation, except for established fraud. Time under ported and migrated policies counts towards the 60 months. If the sum insured was increased, the 60 months for the extra amount runs from the date of the increase. This replaced the earlier eight-year moratorium. A rejection for 'non-disclosure of a pre-existing disease' after 60 months of continuous cover, with no fraud alleged, conflicts with this rule. The policy's other terms, such as its permanent exclusions, still apply.",
+    "source_name": "IRDAI (Insurance Products) Regulations, 2024, Schedule III, para 8; IRDAI Master Circular on Health Insurance Business, 29 May 2024, Chapter I, para 13",
+    "source_url": "https://irdai.gov.in/web/guest/document-detail?documentId=4590475",
+    "tags": "moratorium 60 months 5 years continuous coverage non-disclosure misrepresentation fraud pre-existing contest portability migration",
+    "verified": true,
+    "meta": {"verified_on": "2026-11-05"}
+  },
+  {
+    "id": "reg-ped-waiting",
+    "kind": "regulation",
+    "title": "Pre-existing disease: 36-month definition and maximum waiting period",
+    "body": "Under the IRDAI (Insurance Products) Regulations, 2024, a pre-existing disease is a condition that a physician diagnosed, or for which a physician recommended or gave medical advice or treatment, within 36 months before the policy started. The waiting period for disclosed pre-existing diseases can be at most 36 months of continuous cover; before 2024 both the look-back and the waiting period were 48 months. Specific-disease waiting periods are also capped at 36 months. Going by this definition, a condition first diagnosed during the hospitalisation being claimed, with no earlier diagnosis or advice, does not fall within it.",
+    "source_name": "IRDAI (Insurance Products) Regulations, 2024, Schedule III, paras 1.6, 1.7 and 7",
+    "source_url": "https://irdai.gov.in/web/guest/document-detail?documentId=4590475",
+    "tags": "pre-existing disease PED definition waiting period 36 months 3 years diagnosed treatment before policy look-back non-disclosure specific disease",
+    "verified": true,
+    "meta": {"verified_on": "2026-11-05"}
+  },
+  {
+    "id": "reg-portability-continuity",
+    "kind": "regulation",
+    "title": "Porting or migrating carries over waiting-period and moratorium credit",
+    "body": "When a policyholder ports a health policy to another insurer, or migrates to another plan with the same insurer, they are entitled to carry over the credits already earned, up to the previous sum insured. This includes the no-claim bonus, specific waiting periods, the pre-existing disease waiting period and the moratorium period. A rejection that treats a ported policy as brand new, ignoring prior continuous cover, conflicts with this. Porting is free of charge. The new insurer may still underwrite under its board-approved policy, and on migration may underwrite if the person has not been continuously covered for 36 months.",
+    "source_name": "IRDAI Master Circular on Health Insurance Business, 29 May 2024, Chapter I, paras 11-12; IRDAI (Insurance Products) Regulations, 2024, Schedule III, para 10",
+    "source_url": "https://irdai.gov.in/document-detail?documentId=4942918",
+    "tags": "portability migration ported waiting period credit continuity previous insurer new policy no claim bonus",
+    "verified": true,
+    "meta": {"verified_on": "2026-11-05"}
+  },
+  {
+    "id": "reg-proportionate-deduction",
+    "kind": "regulation",
+    "title": "Room-rent 'proportionate deduction': what policies usually exclude from it",
+    "body": "Where a policy caps room rent and the patient chooses a costlier room, many policies reduce 'associated medical expenses' in the same proportion. IRDAI's 2020 product-filing norms (IRDAI/HLT/REG/CIR/151/06/2020) barred applying this to pharmacy and consumables, implants and medical devices, diagnostics and ICU charges, or at hospitals that do not bill differently by room category. Those norms were consolidated and formally superseded by IRDAI's May 2024 health master circular, which does not repeat them. Policies designed under them generally still carry the same wording. Check your policy's definition of 'associated medical expenses': if it excludes these items, a settlement that applies the room-rent ratio to medicines, implants or tests goes against the policy terms.",
+    "source_name": "Your policy wording ('associated medical expenses' definition). History: IRDAI circular IRDAI/HLT/REG/CIR/151/06/2020, paras 4, 6, 7, superseded by the Master Circular on Health Insurance Business, 29 May 2024 (Annexure-6, item 19)",
+    "source_url": "https://irdai.gov.in/document-detail?documentId=4942918",
+    "tags": "room rent capping proportionate deduction ratio ICU pharmacy consumables implants diagnostics differential billing partial settlement associated medical expenses",
+    "verified": true,
+    "meta": {"verified_on": "2026-11-05", "note": "The 2020 norm is superseded; the policy wording governs."}
+  },
+  {
+    "id": "reg-rejection-in-writing",
+    "kind": "regulation",
+    "title": "Rejections must cite specific policy terms and be approved by a Claims Review Committee",
+    "body": "An insurer that rejects or partly disallows a health claim must tell the claimant the details, with reference to the specific terms and conditions of the policy relied on. No claim may be repudiated without approval from the insurer's Product Management Committee or its three-member Claims Review Committee, which must independently take the final decision on every repudiation. A rejection that names no clause, or cites a clause not in the policy wording you were given, does not meet this requirement. You can ask the insurer to confirm that the Claims Review Committee approved the repudiation.",
+    "source_name": "IRDAI Master Circular on Health Insurance Business, 29 May 2024, Chapter I, para 17(a)-(b) and Chapter II, A.I(4)",
+    "source_url": "https://irdai.gov.in/document-detail?documentId=4942918",
+    "tags": "rejection repudiation written reasons clause policy terms vague claims review committee partial disallowed",
+    "verified": true,
+    "meta": {"verified_on": "2026-11-05"}
+  },
+  {
+    "id": "reg-settlement-timelines",
+    "kind": "regulation",
+    "title": "Claim timelines: reimbursement in 15 days, cashless decisions in 1 hour and 3 hours",
+    "body": "Under IRDAI's 2024 Master Circular on Protection of Policyholders' Interests, reimbursement health claims must be settled within 15 days of the claim being submitted. If the insurer misses the deadline, it must pay interest on its own initiative at 2% above the RBI bank rate, from the date it was told of the claim until payment. For cashless claims, the insurer must decide on a cashless request within one hour. It must give final discharge authorisation within three hours of the hospital's request. Any extra hospital charges caused by a delay beyond three hours must be borne by the insurer.",
+    "source_name": "IRDAI Master Circular on Protection of Policyholders' Interests, 2024, Section 1, Part V; IRDAI Master Circular on Health Insurance Business, 29 May 2024, Chapter I, paras 15-16",
+    "source_url": "https://irdai.gov.in/document-detail?documentId=5625747",
+    "tags": "settlement timeline 15 days delay interest bank rate cashless 1 hour discharge 3 hours authorisation reimbursement",
+    "verified": true,
+    "meta": {"verified_on": "2026-11-05"}
+  },
+  {
+    "id": "reg-documents-from-hospital",
+    "kind": "regulation",
+    "title": "No rejection or closure for missing documents or late intimation",
+    "body": "IRDAI's 2024 health master circular says that once a claim is intimated, the insurer and TPA must collect the required documents from the hospital, and the policyholder is not required to submit them. IRDAI's 2024 policyholder-protection circular adds that no claim shall be rejected or closed for want of documents or for delayed intimation. The documents needed for a claim must be listed in the policy document. A rejection or 'closure' for non-submission of documents, or for late intimation, goes against these rules.",
+    "source_name": "IRDAI Master Circular on Health Insurance Business, 29 May 2024, Chapter I, para 17(c); IRDAI Master Circular on Protection of Policyholders' Interests, 2024, Section 1, Part V, para 1(ii)",
+    "source_url": "https://irdai.gov.in/document-detail?documentId=4942918",
+    "tags": "documents non-submission closed hospital TPA collect late delayed intimation want of documents",
+    "verified": true,
+    "meta": {"verified_on": "2026-11-05"}
+  },
+  {
+    "id": "reg-non-payable-items",
+    "kind": "regulation",
+    "title": "Non-payable items: check your policy's own list",
+    "body": "Many health policies list 'non-payable' items, such as certain consumables, toiletries and administrative charges, often in an annexure based on IRDAI's 2020 standard lists. Those lists also named items that are not separate charges but part of room, procedure or treatment costs. IRDAI's May 2024 master circular superseded the 2020 standardisation circular, so what counts as non-payable now depends on your policy wording and annexures. Check whether a deducted item actually appears in your policy's non-payable list, and whether you bought a consumables add-on.",
+    "source_name": "Your policy wording and annexures. History: IRDAI Master Circular on Standardization of Health Insurance Products, 2020 (IRDAI/HLT/REG/CIR/193/07/2020), superseded by the Master Circular on Health Insurance Business, 29 May 2024 (Annexure-6, item 1)",
+    "source_url": "https://irdai.gov.in/document-detail?documentId=4942918",
+    "tags": "non-payable items consumables gloves masks admin charges list deduction add-on annexure",
+    "verified": true,
+    "meta": {"verified_on": "2026-11-05", "note": "The 2020 list is superseded; the policy wording governs."}
+  },
+  {
+    "id": "reg-modern-treatments",
+    "kind": "regulation",
+    "title": "Modern treatments: IRDAI expects insurers to cover them",
+    "body": "IRDAI's 2024 health master circular says insurers shall endeavour to cover modern treatments and lists examples that 'need to be included'. They include robotic surgery, oral chemotherapy, monoclonal-antibody immunotherapy by injection, intravitreal injections, deep brain stimulation, stereotactic radiosurgery, balloon sinuplasty, and haematopoietic stem-cell transplant for blood disorders. Between 2020 and 2024 an IRDAI circular said these could not be excluded but could be sub-limited, and many policies still reflect that. Check whether your policy covers the treatment, with or without a sub-limit. A deduction down to a disclosed sub-limit may be valid, but a blanket 'not covered' for a listed treatment the policy itself covers is not.",
+    "source_name": "IRDAI Master Circular on Health Insurance Business, 29 May 2024, Chapter I, para 2",
+    "source_url": "https://irdai.gov.in/document-detail?documentId=4942918",
+    "tags": "modern treatment robotic surgery oral chemotherapy immunotherapy stem cell sub-limit exclusion technological advancement",
+    "verified": true,
+    "meta": {"verified_on": "2026-11-05"}
+  },
+  {
+    "id": "reg-mental-illness",
+    "kind": "regulation",
+    "title": "Mental illness must be covered on the same basis as physical illness",
+    "body": "Section 21(4) of the Mental Healthcare Act, 2017 requires every insurer to provide medical insurance for treating mental illness on the same basis as for physical illness. IRDAI's 2024 health master circular requires insurers to offer products in line with the Act. A rejection only because the condition is psychiatric conflicts with this law.",
+    "source_name": "Mental Healthcare Act, 2017, Section 21(4); IRDAI Master Circular on Health Insurance Business, 29 May 2024, Chapter I, para 3",
+    "source_url": "https://egazette.gov.in/WriteReadData/2017/175248.pdf",
+    "tags": "mental illness psychiatric depression parity section 21 Mental Healthcare Act",
+    "verified": true,
+    "meta": {"verified_on": "2026-11-05"}
+  },
+  {
+    "id": "reg-day-care",
+    "kind": "regulation",
+    "title": "Day-care procedures: the 24-hour rule doesn't apply",
+    "body": "Most health policies cover listed day-care treatments: procedures done in under 24 hours because of modern technology that would otherwise need longer hospitalisation, such as cataract surgery, dialysis or chemotherapy. The definition comes from the policy wording; IRDAI's 2020 standard definition allowed insurers to limit cover to a specified list. Treatment normally given on an out-patient basis is not day care. If your policy covers the procedure as day care, rejecting the claim because the stay was under 24 hours goes against the policy terms.",
+    "source_name": "Your policy wording (Day Care Treatment definition and list). Supporting: IRDAI Master Circular on Health Insurance Business, 29 May 2024, Chapter I, para 1(a)(v)",
+    "source_url": "https://irdai.gov.in/document-detail?documentId=4942918",
+    "tags": "day care less than 24 hours hospitalisation cataract dialysis chemotherapy",
+    "verified": true,
+    "meta": {"verified_on": "2026-11-05", "note": "The policy wording governs."}
+  },
+  {
+    "id": "reg-renewal",
+    "kind": "regulation",
+    "title": "Renewal can't be refused because you made a claim",
+    "body": "Under the IRDAI (Insurance Products) Regulations, 2024, an insurer cannot deny renewal of a health policy on the ground that the insured made a claim. It also cannot carry out fresh underwriting at renewal when the sum insured hasn't changed.",
+    "source_name": "IRDAI (Insurance Products) Regulations, 2024, Schedule III, paras 9.2 and 9.5",
+    "source_url": "https://irdai.gov.in/web/guest/document-detail?documentId=4590475",
+    "tags": "renewal denied refused claim made fresh underwriting loading",
+    "verified": true,
+    "meta": {"verified_on": "2026-11-05"}
+  },
+  {
+    "id": "reg-multiple-policies",
+    "kind": "regulation",
+    "title": "More than one health policy: you choose the primary insurer",
+    "body": "If you hold more than one health policy, you can choose which insurer settles your claim first. That insurer must coordinate with your other insurers so the balance amount is settled without causing you any hassle.",
+    "source_name": "IRDAI Master Circular on Health Insurance Business, 29 May 2024, Chapter I, para 18(a)",
+    "source_url": "https://irdai.gov.in/document-detail?documentId=4942918",
+    "tags": "multiple policies two insurers contribution balance amount primary insurer employer group policy",
+    "verified": true,
+    "meta": {"verified_on": "2026-11-05"}
+  },
+  {
+    "id": "proc-reply-must-name-ombudsman",
+    "kind": "process",
+    "title": "The insurer's reply to your complaint must give the Ombudsman's contact details",
+    "body": "IRDAI's 2024 health master circular requires the insurer's response letter to any grievance to include the contact details of the relevant Insurance Ombudsman. A reply that leaves these out doesn't meet this requirement. You can find your Ombudsman office on cioins.co.in.",
+    "source_name": "IRDAI Master Circular on Health Insurance Business, 29 May 2024, Chapter I, para 19",
+    "source_url": "https://irdai.gov.in/document-detail?documentId=4942918",
+    "tags": "grievance reply response letter ombudsman contact details",
+    "verified": true,
+    "meta": {"verified_on": "2026-11-05"}
+  }
+]

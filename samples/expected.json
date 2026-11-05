@@ -1,0 +1,103 @@
+{
+  "case-1-room-rent": {
+    "files": {
+      "policy": "policy.pdf",
+      "bill": "bill.pdf",
+      "rejection": "rejection-letter.pdf"
+    },
+    "overall": [
+      "strong",
+      "moderate"
+    ],
+    "citations_any": [
+      "reg-proportionate-deduction"
+    ],
+    "decision": [
+      "partially_settled"
+    ],
+    "claim_amount": 286000,
+    "amount_approved": 175000
+  },
+  "case-2-moratorium": {
+    "files": {
+      "policy": "policy.pdf",
+      "bill": "bill.pdf",
+      "rejection": "rejection-letter.pdf"
+    },
+    "overall": [
+      "strong",
+      "moderate"
+    ],
+    "citations_any": [
+      "reg-moratorium",
+      "reg-portability-continuity",
+      "reg-ped-waiting"
+    ],
+    "decision": [
+      "fully_rejected"
+    ],
+    "claim_amount": 185000,
+    "moratorium": true
+  },
+  "case-3-day-care": {
+    "files": {
+      "policy": "policy.pdf",
+      "bill": "bill.pdf",
+      "rejection": "rejection-letter-photo.jpg"
+    },
+    "overall": [
+      "strong",
+      "moderate"
+    ],
+    "citations_any": [
+      "reg-day-care"
+    ],
+    "decision": [
+      "fully_rejected"
+    ],
+    "claim_amount": 62000
+  },
+  "case-4-initial-waiting": {
+    "files": {
+      "policy": "policy.pdf",
+      "bill": "bill.pdf",
+      "rejection": "rejection-letter.pdf"
+    },
+    "overall": [
+      "weak"
+    ],
+    "citations_any": [],
+    "decision": [
+      "fully_rejected"
+    ],
+    "claim_amount": 74000
+  },
+  "case-5-specific-waiting": {
+    "files": {
+      "policy": "policy.pdf",
+      "bill": "bill.pdf",
+      "rejection": "rejection-letter.pdf"
+    },
+    "overall": [
+      "weak"
+    ],
+    "citations_any": [],
+    "decision": [
+      "fully_rejected"
+    ],
+    "claim_amount": 345000
+  },
+  "case-6-no-reason": {
+    "files": {
+      "policy": "policy.pdf",
+      "bill": "bill.pdf",
+      "rejection": "rejection-letter.pdf"
+    },
+    "pause": "required",
+    "decision": [
+      "fully_rejected",
+      "unknown"
+    ],
+    "claim_amount": 121000
+  }
+}

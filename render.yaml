@@ -1,0 +1,32 @@
+# Render Blueprint: New + > Blueprint > pick this repo. Secrets marked sync:false are asked for at setup.
+services:
+  - type: web
+    name: claimfighter
+    runtime: docker
+    plan: starter            # persistent disks need a paid plan; the free plan would lose all data on restart
+    healthCheckPath: /api/health
+    disk:
+      name: data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: CF_ENV
+        value: prod
+      - key: CF_DAILY_BUDGET_USD
+        value: "2"
+      - key: CF_MAX_CASES_PER_USER_DAY
+        value: "5"
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: CF_ADMIN_EMAILS
+        sync: false
+      - key: CF_SMTP_HOST
+        sync: false
+      - key: CF_SMTP_PORT
+        value: "587"
+      - key: CF_SMTP_USER
+        sync: false
+      - key: CF_SMTP_PASSWORD
+        sync: false
+      - key: CF_EMAIL_FROM
+        sync: false
